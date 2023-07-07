@@ -36,9 +36,6 @@ df = pd.DataFrame(dic)
 df.head()
 train_data = df[df['purpose']=='T']
 val_data = df[df['purpose']=='V']
-train_data.head()
-val_data.head()
-train_data['labels'].value_counts()
 happy_df = train_data[train_data['labels']=='Happy'].sample(n=3171)
 neutral_df = train_data[train_data['labels']=='Neutral'].sample(n=3171)
 sad_df = train_data[train_data['labels']=='Sad'].sample(n=3171)
@@ -53,7 +50,6 @@ train_data.reset_index(inplace=True)
 train_data.drop('index',inplace=True,axis=1)
 
 train_data.head()
-train_data['labels'].value_counts()
 sns.countplot(train_data['labels'])
 batch_size= 32
 classes = 6
@@ -124,7 +120,6 @@ model.add(Dropout(0.5))
 # Eighth Block
 model.add(Dense(classes,activation='softmax',kernel_initializer='he_normal'))
 
-print(model.summary())
 checkpoint = ModelCheckpoint('model\\6_class_emotion_detector_V2.h5',
                              save_best_only=True,
                              mode='min',
